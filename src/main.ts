@@ -21,7 +21,18 @@ const getMobs = async () => {
   return data;
 };
 
-// add id as meta data in the
+// This is to generate the container for each mob
+const populate = (name: string, id: string) => {
+  const div = document.createElement("div");
+  const p = document.createElement("p");
+
+  p.textContent = name;
+  div.setAttribute("data-id", id);
+  div.appendChild(p);
+  main.appendChild(div);
+};
+
+// This generate a new container with input name and click add button
 const addMob = () => {
   const input = document.getElementById("aside__input") as HTMLInputElement;
   const name = input.value;
@@ -33,17 +44,19 @@ const addMob = () => {
 };
 
 // to go into the mob information
-const getMobInfo = async () => {
-  const mob = await fetch(
-    "https://mobster-backend-production.up.railway.app/mobs/"
-  );
-  // change the content in main, wait for the innerHTML content.
-};
+// const getMobInfo = async () => {
+//   const mob = await fetch(
+//     "https://mobster-backend-production.up.railway.app/mobs/"
+//   );
+//   // change the content in main, wait for the innerHTML content.
+// };
 
 document.addEventListener("DOMContentLoaded", async () => {
   const mobs = await getMobs();
-  const p = document.getElementById("mobs") as HTMLParagraphElement;
-  p.textContent = mobs.join();
+  mobs.forEach((mob: Mob) => {
+    populate(mob.mobName, mob.id);
+  });
+  console.log(mobs);
 });
 
 const btn = document.getElementById("aside__button") as HTMLButtonElement;
