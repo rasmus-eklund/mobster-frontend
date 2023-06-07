@@ -34,7 +34,9 @@ const addMob = () => {
 
 // to go into the mob information
 const getMobInfo = async () => {
-  const mob = await fetch("https://mobster-backend-production.up.railway.app");
+  const mob = await fetch(
+    "https://mobster-backend-production.up.railway.app/mobs/"
+  );
   // change the content in main, wait for the innerHTML content.
 };
 
