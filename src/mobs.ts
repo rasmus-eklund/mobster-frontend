@@ -1,27 +1,37 @@
-// const baseUrl = 'https://mobster-backend-production.up.railway.app';
-// import { Member, Mob } from './main';
+import { getBase } from './main';
+import { Member } from './vite-env';
+// import { renderMember } from './member';
 
-// /* Create functions*/
-// const makeDivElement = document.createElement('div');
-// const makeParagraphElement = document.createElement('p');
+const makeMember = (member: Member) => {
+  const section = `<section class = "member" data-id=${member.id}>
+    <p>${member.name}</p>
+    <p>${member.height}</p>
+  </section>`;
+  return section;
+};
+const makeMembers = function (members: Member[]) {
+  let elements = '';
+  members.forEach((member: Member) => {
+    elements += makeMember(member);
+  });
+  return elements;
+};
 
-// /* Already in the DOM */
-// const htmlAside = document.getElementsByClassName('header__aside');
+const renderMembers = async (mobId: string) => {
+  const main = document.querySelector('.main') as HTMLElement;
+  const response = await fetch(getBase(['mobs', mobId, 'members']));
+  const members: Member[] = await response.json();
+  const div = document.createElement('div');
+  div.classList.add('main__members');
+  div.innerHTML = makeMembers(members);
+  main.appendChild(div);
+};
 
-// /* Api call */
+const renderMobName = (name: string) => {
+  const main = document.querySelector('.main') as HTMLElement;
+  const nameContainer = document.createElement('h1') as HTMLHeadElement;
+  nameContainer.textContent = name;
+  main.appendChild(nameContainer);
+};
 
-// const getData = async (id: string) => {
-//   const response = await fetch(`${baseUrl}/mobs/${id}`);
-//   const data: Mob = await response.json();
-//   return data;
-// };
-
-// const populate = async (id: string) => {
-//   const data = await getData(id);
-//   const makeDivElement = document.createElement('div');
-//   const makeParagraphElement = document.createElement('p');
-//   const populatePage = makeDivElement.appendChild(makeParagraphElement);
-//   makeParagraphElement.textContent = data.id;
-  
- 
-// };
+export { renderMembers, renderMobName };
