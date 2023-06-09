@@ -1,32 +1,33 @@
-import "./style.css";
-import { Mob, Member } from "./vite-env";
-import { renderMembers, renderMobName } from "./mobs";
+import './style.css';
+import { Mob, Member } from './vite-env';
+import { renderMembers, renderMobName } from './mobs';
+import { addMember } from './member';
 
 const getBase = (path: string[]) => {
-  const baseUrl = "https://mobster-backend-production.up.railway.app";
+  const baseUrl = 'https://mobster-backend-production.up.railway.app';
   // const baseUrl = 'http://localhost:3000';
-  return `${baseUrl}/${path.join("/")}`;
+  return `${baseUrl}/${path.join('/')}`;
 };
 
-const main = document.querySelector(".display_area") as HTMLElement;
+const main = document.querySelector('.display_area') as HTMLElement;
 
 const getMobs = async () => {
-  const mobs = await fetch(getBase(["mobs"]));
+  const mobs = await fetch(getBase(['mobs']));
   const data = mobs.json();
   return data;
 };
 
 // This is to generate the container for each mob
 const populate = (name: string, id: string) => {
-  const div = document.createElement("div");
-  const p = document.createElement("p");
+  const div = document.createElement('div');
+  const p = document.createElement('p');
   p.textContent = name;
-  div.setAttribute("data-id", id);
+  div.setAttribute('data-id', id);
   div.appendChild(p);
-  div.addEventListener("click", function (_) {
-    const id = this.getAttribute("data-id") as string;
-    main.innerHTML = "";
-    renderMobName(name);
+  div.addEventListener('click', function (_) {
+    const id = this.getAttribute('data-id') as string;
+    main.innerHTML = '';
+    renderMobName(name, id);
     renderMembers(id);
   });
   main.appendChild(div);
@@ -34,8 +35,8 @@ const populate = (name: string, id: string) => {
 
 // This generate a new container with input name and click add button
 const createMob = (name: string) => {
-  const div = document.createElement("div");
-  const p = document.createElement("p");
+  const div = document.createElement('div');
+  const p = document.createElement('p');
   p.textContent = name;
   div.appendChild(p);
   main.appendChild(p);
@@ -43,11 +44,11 @@ const createMob = (name: string) => {
 
 // Sending post request to the backend
 const postMob = async (name: string) => {
-  const url = getBase(["mobs"]);
+  const url = getBase(['mobs']);
   await fetch(url, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ mobName: name }),
   });
@@ -55,13 +56,13 @@ const postMob = async (name: string) => {
 
 // combining the createMob and sendPostRequest functions
 const addMob = async () => {
-  const input = document.querySelector(".addmob__input") as HTMLInputElement;
+  const input = document.querySelector('.addmob__input') as HTMLInputElement;
   const name = input.value;
   await postMob(name);
   createMob(name);
 };
 
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const mobs = await getMobs();
   mobs.forEach((mob: Mob) => {
     populate(mob.mobName, mob.id);
@@ -69,8 +70,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // Creating new mob
-const btn = document.querySelector(".addmob__button") as HTMLButtonElement;
+const btn = document.querySelector('.addmob__button') as HTMLButtonElement;
 btn.onclick = addMob;
+// Create new member
+const addMemberButton = document.querySelector(
+  '.addmember__button'
+) as HTMLButtonElement;
+addMemberButton.addEventListener('click', () => {
+  const element = document.querySelector(
+    '.display_area__mob-name'
+  ) as HTMLHeadingElement;
+  const id = element.getAttribute('data-id') as string;
+  const name = element.textContent as string;
+  addMember(id);
+  renderMobName(name, id);
+  renderMembers(id);
+});
 
 export type { Member, Mob };
 export { getBase };

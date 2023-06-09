@@ -36,6 +36,7 @@ const renderMembers = async (mobId: string) => {
   mob.hide();
   member.show();
   const main = document.querySelector('.main') as HTMLElement;
+  main.innerHTML = '';
   const response = await fetch(getBase(['mobs', mobId, 'members']));
   const members: Member[] = await response.json();
   const div = document.createElement('div');
@@ -44,10 +45,12 @@ const renderMembers = async (mobId: string) => {
   main.appendChild(div);
 };
 
-const renderMobName = (name: string) => {
+const renderMobName = (name: string, id: string) => {
   const main = document.querySelector('.main') as HTMLElement;
   const nameContainer = document.createElement('h1') as HTMLHeadElement;
   nameContainer.textContent = name;
+  nameContainer.setAttribute('data-id', id);
+  nameContainer.className = 'display_area__mob-name';
   main.appendChild(nameContainer);
 };
 
