@@ -8,7 +8,7 @@ const getBase = (path: string[]) => {
   return `${baseUrl}/${path.join("/")}`;
 };
 
-const main = document.querySelector(".main") as HTMLElement;
+const main = document.querySelector(".display_area") as HTMLElement;
 
 const getMobs = async () => {
   const mobs = await fetch(getBase(["mobs"]));

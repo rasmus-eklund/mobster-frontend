@@ -2,8 +2,32 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.header{
+  font-size: xx-large;
+  font-weight: bold;
+  text-align: center;
+}
+
+.main{
+  display: flex;
+  flex-direction: row;
+} */
+
+.aside__addmob  {
+  display: flex;
+  flex-direction: column;
+}
+
+.aside__addmember{
+  display: flex;
+  flex-direction: column;
 }
 
 .hidden {
   display: none;
 }
+
