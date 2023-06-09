@@ -76,15 +76,16 @@ btn.onclick = addMob;
 const addMemberButton = document.querySelector(
   '.addmember__button'
 ) as HTMLButtonElement;
-addMemberButton.addEventListener('click', () => {
-  const element = document.querySelector(
-    '.display_area__mob-name'
+
+addMemberButton.addEventListener('click', async () => {
+  const mobElement = document.querySelector(
+    '.display_area_mobName'
   ) as HTMLHeadingElement;
-  const id = element.getAttribute('data-id') as string;
-  const name = element.textContent as string;
-  addMember(id);
+  const id = mobElement.getAttribute('data-id') as string;
+  const name = mobElement.textContent as string;
+  await addMember(id);
   renderMobName(name, id);
-  renderMembers(id);
+  await renderMembers(id);
 });
 
 export type { Member, Mob };

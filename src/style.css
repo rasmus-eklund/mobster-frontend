@@ -54,6 +54,7 @@
 
 .display_area_members {
   display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
