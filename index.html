@@ -1,27 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <base href="mobster-frontend" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
-  </head>
 
-  <body class="body">
-    <header class="header"></header>
+<head>
+  <meta charset="UTF-8" />
+  <base href="mobster-frontend" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salt World</title>
+</head>
+
+<body class="body">
+  <header class="header">SALT WORLD</header>
+
+  <main class="main">
     <aside class="header__aside">
+
       <div class="aside__addmob">
+        <label for="addmob__button">MOB NAME</label>
         <input class="addmob__input" type="text" />
         <button class="addmob__button">Add</button>
       </div>
+
       <div class="aside__addmember hidden">
-        <input class="addmember__input name" type="text" />
-        <input class="addmember__input " type="text" />
+        <label for="addmember__input_name">MEMBER NAME</label>
+        <input class="addmember__input_name" type="text" />
+        <label for="addmember__input_height">MEMBER HEIGHT</label>
+        <input class="addmember__input_height " type="text" />
         <button class="addmember__button">Add</button>
       </div>
 
     </aside>
-    <main class="main"></main>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+    <section class="display_area"></section>
+  </main>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>
