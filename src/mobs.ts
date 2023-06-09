@@ -44,10 +44,12 @@ const renderMembers = async (mobId: string) => {
   main.appendChild(div);
 };
 
-const renderMobName = (name: string) => {
+const renderMobName = (name: string, id: string) => {
   const main = document.querySelector('.main') as HTMLElement;
   const nameContainer = document.createElement('h1') as HTMLHeadElement;
   nameContainer.textContent = name;
+  nameContainer.setAttribute('data-id', id);
+  nameContainer.className = 'display_area__mob-name';
   main.appendChild(nameContainer);
 };
 

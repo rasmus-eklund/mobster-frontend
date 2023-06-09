@@ -1,10 +1,16 @@
 import { getBase } from './main';
 
-const renderMember = (id: string) => {
-  console.log(id);
+const addMember = async (id: string) => {
+  const name = document.querySelector(
+    '.addmember__input_name'
+  ) as HTMLInputElement;
+  const height = document.querySelector(
+    '.addmember__input_height'
+  ) as HTMLInputElement;
+  await postMember({ name: name.value, height: parseInt(height.value) }, id);
 };
 
-const addMember = async (
+const postMember = async (
   body: { name: string; height: number },
   mobId: string
 ) => {
@@ -18,4 +24,4 @@ const addMember = async (
   });
 };
 
-export { renderMember };
+export { addMember };
