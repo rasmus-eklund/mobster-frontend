@@ -2,10 +2,25 @@ import { getBase } from './main';
 import { Member } from './vite-env';
 // import { renderMember } from './member';
 
+const toggleElement = (selector: string) => {
+  const element = document.querySelector(selector) as HTMLDivElement;
+  return {
+    show: () => {
+      element.classList.remove('hidden');
+    },
+    hide: () => {
+      element.classList.add('hidden');
+    },
+  };
+};
+
+const mob = toggleElement('.aside__addmob');
+const member = toggleElement('.aside__addmember');
+
 const makeMember = (member: Member) => {
   const section = `<section class = "member" data-id=${member.id}>
-    <p>${member.name}</p>
-    <p>${member.height}</p>
+    <p>Name: ${member.name}</p>
+    <p>Height: ${member.height}</p>
   </section>`;
   return section;
 };
@@ -18,6 +33,8 @@ const makeMembers = function (members: Member[]) {
 };
 
 const renderMembers = async (mobId: string) => {
+  mob.hide();
+  member.show();
   const main = document.querySelector('.main') as HTMLElement;
   const response = await fetch(getBase(['mobs', mobId, 'members']));
   const members: Member[] = await response.json();
