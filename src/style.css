@@ -6,31 +6,33 @@
 }
 
 
-.header{
+.header {
   font-size: xx-large;
   font-weight: bold;
   text-align: center;
   padding: 2rem 0;
+  border-bottom: 2px solid black;
 }
 
-.main{
+.main {
   display: flex;
   flex-direction: row;
-  gap:5%;
-} 
+  gap: 5%;
+}
 
 
-.aside__addmob  {
+.aside__addmob {
   display: flex;
   flex-direction: column;
   height: 500px;
   gap: 1%;
-  
+
 }
 
-.aside__addmember{
+.aside__addmember {
   display: flex;
   flex-direction: column;
+  height: 500px;
   gap: 1%;
 }
 
@@ -45,12 +47,20 @@
   gap: 2%;
 }
 
-.display_area>div{
+.display_area>div {
   border: 1px solid black;
 
 }
+
+.display_area_members {
+  display: flex;
+  width: 100%;
+}
+
+.member {
+  border: 1px solid black;
+}
+
 .hidden {
   display: none;
 }
-
-
