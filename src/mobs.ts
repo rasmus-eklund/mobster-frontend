@@ -36,6 +36,7 @@ const renderMembers = async (mobId: string) => {
   mob.hide();
   member.show();
   const main = document.querySelector('.main') as HTMLElement;
+  main.innerHTML = '';
   const response = await fetch(getBase(['mobs', mobId, 'members']));
   const members: Member[] = await response.json();
   const div = document.createElement('div');
